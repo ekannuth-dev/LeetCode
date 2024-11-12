@@ -1,8 +1,22 @@
 class Solution:
 	def generateParenthesis(self, n):
-		i = 0
-		s = "()"
-		while (i <= n):
-			x = 0
-			sampleDict = {}
-		return
+		#no brute force, need to speed up solution
+		finalSolution, currSolution  = [], "("
+		moves = (n * 2) - 1  #I am going to set it to always start with an opening brace
+		stack = ["("] 
+		def dfs(finalSolution,currSolution, moves, stack):
+			if moves == 0:
+				if stack == []:
+					finalSolution += [currSolution]
+				return
+			else:
+				if currSolution[-1] == ")" and stack == []:
+					stack += ["("]
+					dfs(finalSolution, currSolution + "(", moves - 1, stack)
+				elif currSolution[-1] == "(":
+					stack.pop()
+					dfs(finalSolution,currSolution + ")",moves -1, stack)
+				else:
+					return
+		print(finalSolution)
+		return finalSolution
