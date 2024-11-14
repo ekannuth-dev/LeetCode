@@ -1,22 +1,18 @@
 class Solution:
 	def generateParenthesis(self, n):
 		#no brute force, need to speed up solution
-		finalSolution, currSolution  = [], "("
-		moves = (n * 2) - 1  #I am going to set it to always start with an opening brace
-		stack = ["("] 
-		def dfs(finalSolution,currSolution, moves, stack):
-			if moves == 0:
-				if stack == []:
-					finalSolution += [currSolution]
+		finalSolution  = []
+		def dfs(finalSolution,currSolution, moves, openCount, closeCount):
+			if moves == 0 and openCount == closeCount:
+				finalSolution += [currSolution]
+				return
+			elif (openCount - closeCount) > moves or closeCount > openCount:
 				return
 			else:
-				if currSolution[-1] == ")" and stack == []:
-					stack += ["("]
-					dfs(finalSolution, currSolution + "(", moves - 1, stack)
-				elif currSolution[-1] == "(":
-					stack.pop()
-					dfs(finalSolution,currSolution + ")",moves -1, stack)
-				else:
-					return
-		print(finalSolution)
+				dfs(finalSolution, currSolution + ")", moves - 1, openCount, closeCount + 1)
+				dfs(finalSolution,currSolution + "(", moves -1, openCount + 1, closeCount)
+		dfs(finalSolution,currSolution = "(", moves = (n * 2) - 1, openCount = 1, closeCount = 0)
 		return finalSolution
+
+object = Solution()
+object.generateParenthesis(3)
