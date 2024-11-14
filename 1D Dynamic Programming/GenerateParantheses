@@ -1,6 +1,5 @@
 class Solution:
 	def generateParenthesis(self, n):
-		#no brute force, need to speed up solution
 		finalSolution  = []
 		def dfs(finalSolution,currSolution, moves, openCount, closeCount):
 			if moves == 0 and openCount == closeCount:
@@ -11,7 +10,7 @@ class Solution:
 			else:
 				dfs(finalSolution, currSolution + ")", moves - 1, openCount, closeCount + 1)
 				dfs(finalSolution,currSolution + "(", moves -1, openCount + 1, closeCount)
-		dfs(finalSolution,currSolution = "(", moves = (n * 2) - 1, openCount = 1, closeCount = 0)
+		dfs(finalSolution,"(", (n * 2) - 1, 1, 0)
 		return finalSolution
 
 object = Solution()
