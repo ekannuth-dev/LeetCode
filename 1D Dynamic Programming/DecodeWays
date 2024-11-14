@@ -1,26 +1,23 @@
 class Solution(object):
 	def numDecodings(self, s):
-		if s[0] == '0':
+		if s[0] == "0":
 			return 0
-		prev = s[0]
-		count = 1
-		increment = False
+		dparray = [1] * len(s)
 		for i in range(1,len(s)):
-			val = int(prev + s[i])
-			if (val >= 1 and val <= 26) and prev != '0':
-				if s[i] == "0":
-					if increment == True:
-						count -=1
-						increment = False
+			if s[i] == "0":
+				if 10 <= int(s[i-1] + s[i]) <= 20:
+					if len(s[0:i]) == 2:
+						dparray[i] = 1
+					else:
+						dparray[i] = dparray[i-2]
 				else:
-					count += 1
-					increment = True
-			elif s[i] == '0':
-				print(0)
-				return 0
-			prev = s[i]
-		print(count)
-		return count
+					return 0
+			elif 11 <= int(s[i-1] +s[i]) <= 26:
+				dparray[i] = dparray[i-1] + 1
+			else:
+				dparray[i] = dparray[i-1]
+		print(dparray[-1])
+		return dparray[-1]
 
 
 
@@ -29,7 +26,7 @@ class Solution(object):
 object = Solution()
 
 #Trailing zero cannot be represented
-#object.numDecodings("100")
+object.numDecodings("1123")
 
 #represented in 2 ways
 #object.numDecodings("11101")
@@ -44,7 +41,7 @@ object = Solution()
 #object.numDecodings("12261023")
 
 #double count
-object.numDecodings("112")
+#object.numDecodings("112")
 
 
 #object.numDecodings("100")
