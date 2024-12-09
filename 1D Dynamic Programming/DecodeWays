@@ -1,23 +1,26 @@
 class Solution(object):
 	def numDecodings(self, s):
-		if s[0] == "0":
+		if s[0] == 0:  #make it int later
 			return 0
-		dparray = [1] * len(s)
+		prevSingles = 0
+		totalCombinations = 1
+		s = "0" + s
 		for i in range(1,len(s)):
-			if s[i] == "0":
-				if 10 <= int(s[i-1] + s[i]) <= 20:
-					if len(s[0:i]) == 2:
-						dparray[i] = 1
-					else:
-						dparray[i] = dparray[i-2]
+			if 10 <= int(s[i-1] + s[i]) <= 26:
+				#it happens to be 10 or 20, cannot be represented alone, can only be represented by singles
+				if s[i] == 0:
+					totalCombinations = prevSingles
+					prevSingles = 0
 				else:
-					return 0
-			elif 11 <= int(s[i-1] +s[i]) <= 26:
-				dparray[i] = dparray[i-1] + 1
+					oldCombinations = totalCombinations
+					totalCombinations += (prevSingles * 2)
+					prevSingles = oldCombinations
+			elif s[i] == 0:
+				return 0
 			else:
-				dparray[i] = dparray[i-1]
-		print(dparray[-1])
-		return dparray[-1]
+				prevSingles = 1
+		print(totalCombinations)
+		return totalCombinations
 
 
 
@@ -26,9 +29,10 @@ class Solution(object):
 object = Solution()
 
 #Trailing zero cannot be represented
-object.numDecodings("1123")
+#object.numDecodings("1123")
 
 #represented in 2 ways
+object.numDecodings("11")
 #object.numDecodings("11101")
 
 #leading zero cannot be represented
