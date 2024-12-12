@@ -1,31 +1,7 @@
 class Solution(object):
 	def numDecodings(self, s):
-		if s[0] == '0':  #make it int later
-			return 0
-		#case for one char
-		prevSingles = 1
-		oldCombinations = 0
-		totalCombinations = 1
-		s = "0" + s
-		for i in range(1,len(s)):
-			if 10 <= int(s[i-1] + s[i]) <= 26:
-				#it happens to be 10 or 20, cannot be represented alone, can only be represented by singles
-				if s[i] == "0":
-					oldCombinations = totalCombinations
-					totalCombinations -= (totalCombinations - prevSingles)
- #gives me the combined options or no singles, take the away from all combinations so that I only have recent singles to be combined with 0
-					prevSingles = 0
-				else:
-					oldCombinations = totalCombinations
-					totalCombinations += (prevSingles * 2)
-	#based on how many combinations do not have a prevSingle will tell you have many new prev Singles you add to prevSingle count
-					prevSingles += oldCombinations - prevSingles
-			elif s[i] == '0':
-				return 0
-			else:
-				prevSingles = totalCombinations
-		print(max(oldCombinations,1))
-		return (max(oldCombinations,1))
+		return
+	#	return (max(oldCombinations,1))
 
 
 
@@ -34,11 +10,11 @@ class Solution(object):
 object = Solution()
 
 #Trailing zero cannot be represented
-#object.numDecodings("1123")
+object.numDecodings("112")
 
 #represented in 2 ways
 #object.numDecodings("1")
-object.numDecodings("2610")
+#object.numDecodings("0111")
 
 #leading zero cannot be represented
 #object.numDecodings("0111")
