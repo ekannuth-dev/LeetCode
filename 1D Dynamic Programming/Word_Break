@@ -1,17 +1,26 @@
 class Solution:
 	def wordBreak(self, s, wordDict):
-		firstValid = 0
-		totalValid = ""
-		lp, rp = 0, 1
-		while (rp <= len(s)):
-			if s[lp:rp] in wordDict:
-				firstValid = rp
-			elif s[lp:rp]:
-				return
-			rp += 1
-		if totalValid == s:
-			return True
-		return False
+		prevValid = ""
+		dp = [0]
+		start = 0
+		end = 1
+		for end in range(len(s) + 1):
+			if s[start:end] in wordDict:
+				prevValid += s[start:end]
+				dp += [end]
+				start = end
+			elif prevValid + s[start:end] in wordDict:
+				prevValid += s[start:end]
+				dp = [start,end]
+				start = end
+			elif len(dp) >= 2:
+				for index in range(0,len(dp)):
+					if prevValid[dp[index]:dp[-1]] + s[start:end] in wordDict:
+						dp = dp[index:] + [end]
+						prevValid += s[start:end]
+						start = end
+						break
+		return prevValid == s
 		
 	
 
@@ -19,10 +28,8 @@ class Solution:
 
 words = Solution()
 wordDict = {
-	"a": 4,
-	"abc": 5,
-	"b": 5,
-	"cd": 6,
+	"leet": 4,
+	"code": 5,
 }
 
-words.wordBreak("abcd", wordDict)
+words.wordBreak("l", wordDict)
