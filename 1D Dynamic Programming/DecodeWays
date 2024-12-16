@@ -1,8 +1,28 @@
 class Solution(object):
 	def numDecodings(self, s):
-		return
-	#	return (max(oldCombinations,1))
+		if s[0] == '0':
+			return 0
+		prevSingles = 0
+		totalCombinations = 1
+		for i in range(1,len(s)):
+			if 10 <= int(s[i-1] + s[i]) <= 26:
+				if s[i] == '0':
+					if prevSingles != 0:
+						totalCombinations -= (totalCombinations - prevSingles)
+						prevSingles = 0
+				else:
+					oldCombinations = totalCombinations
+					totalCombinations += max(((prevSingles * 2) - prevSingles),1)
+					prevSingles += (oldCombinations - prevSingles)
+			elif s[i] == '0':
+				return 0
+			else:
+				prevSingles += (totalCombinations - prevSingles)
+		print(totalCombinations)
+		return totalCombinations
 
+#handle zero case at the end 
+#handle edge case at the end
 
 
 #Test Cases 
@@ -10,7 +30,7 @@ class Solution(object):
 object = Solution()
 
 #Trailing zero cannot be represented
-object.numDecodings("112")
+object.numDecodings("123123")
 
 #represented in 2 ways
 #object.numDecodings("1")
