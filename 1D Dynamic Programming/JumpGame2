@@ -1,23 +1,26 @@
 class Solution(object):
 	def jump(self, nums):
-		nums[-1] = 0
-		index = len(nums) - 2
-		while (index >= 0):
-			if index + nums[index] >= len(nums) - 1:
-				nums[index] = 1 + nums[-1]
-			else:
-				nums[index] = nums[index+nums[index]] + 1
-		print(nums[0])
-		print(nums)
-		return nums[0]
+		moves = 0
+		dp = [0] * len(nums)
+		if len(nums) == 1:
+			return 0
+		for i in range(len(nums)):
+			moves = dp[i] + 1
+			for j in range(i,i + nums[i] + 1):
+				if dp[-1] != 0:
+					print(dp[-1])
+					return dp[-1]
+				elif dp[j] == 0:
+					dp[j] = moves
+		return dp[-1]
 
 object = Solution()
 #Base Case
-object.jump([2,3,0,1,4])
+#object.jump([2,10,0,1,4])
 #object.jump([2,3,1,1,4])
 
 #Edge case
-#object.jump([2])
+object.jump([2])
 
 #Test Case bigger moves but not needed
 #object.jump([10,9,8,7,6,100,1])
