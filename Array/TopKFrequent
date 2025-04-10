@@ -1,0 +1,44 @@
+class Solution:
+	def sortArray(self,nums):
+		pivot = len(nums) // 2
+		leftside = []
+		rightside = []
+		i = 0
+		if nums == []:
+			return []
+		while (i < len(nums)):
+			if i == pivot:
+				i += 1
+			elif nums[i] <= nums[pivot]:
+				leftside.append(nums[i])
+				i += 1
+			else:
+				rightside.append(nums[i])
+				i += 1
+		return self.sortArray(leftside) + [nums[pivot]] + self.sortArray(rightside)
+
+	def topKFrequent(self, nums, k):
+		nums = self.sortArray(nums)
+		arrayCount = []
+		count = 1
+		sampleDict = {nums[0]: 1}
+		for i in range(1,len(nums)):
+			sampleDict[nums[i]] = sampleDict.get(nums[i],0) + 1
+			if nums[i] == nums[i -1]:
+				count += 1
+			else:
+				arrayCount.append(count)
+				count = 1
+		arrayCount.append(count)
+		arrayCount = self.sortArray(arrayCount)
+		minVal = arrayCount[-k]
+		result = []
+		for key in sampleDict:
+			if sampleDict[key] >= minVal:
+				result.append(key)
+		print(result)
+		return result
+
+
+val = Solution()
+val.topKFrequent([1] , 1)

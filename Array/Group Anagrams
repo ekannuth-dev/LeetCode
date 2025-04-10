@@ -1,0 +1,20 @@
+class Solution(object):
+    def groupAnagrams(self, strs):
+        result = {}
+        finalresult = []
+        for x in range(len(strs)):
+            charCount = [0] * 26
+            for i in range(len(strs[x])):
+                char = strs[x][i]
+                charCount[ord(char) - ord("a")] += 1
+            charCount = tuple(charCount)
+            if charCount in result:
+                result[charCount].append(strs[x])
+            else:
+                result[charCount] = [strs[x]]
+        return result.values()
+
+
+object = Solution()
+strs = ["","ate", "nat"]
+object.groupAnagrams(strs)

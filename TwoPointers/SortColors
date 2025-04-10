@@ -1,0 +1,25 @@
+class Solution(object):
+	def sortColors(self, nums):
+		def swap(nums,lp,rp):
+			temp = nums[lp]
+			nums[lp] = nums[rp]
+			nums[rp] = temp
+		low = 0
+		mid = 0
+		high = len(nums) - 1
+		for i in range(len(nums)):
+			if nums[mid] == 0:
+				swap(nums,low,mid)
+				low += 1
+				mid += 1
+			elif nums[mid] == 2:
+				swap(nums,mid,high)
+				high -= 1
+			else:
+				mid +=1
+		print(nums)
+		return nums
+
+
+solution = Solution()
+solution.sortColors([2,1,0,0])

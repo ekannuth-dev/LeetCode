@@ -1,0 +1,20 @@
+class Solution(object):
+	def lengthOfLongestSubsequence(self, nums, target):
+		solution = [-1]
+		def dfs(nums,target,moves, solution):
+			if target == 0:
+				solution[0] = max(solution[0], moves)
+			elif target < 0:
+				return
+			else:
+				while nums:
+					if nums[0] <= target:
+						dfs(nums[1:], target - nums[0], moves + 1, solution)
+					nums = nums[1:]
+			return
+		dfs(nums,target,0,solution)
+		return solution[0]
+
+
+object = Solution()
+object.lengthOfLongestSubsequence([1,1,5,4,5],3)

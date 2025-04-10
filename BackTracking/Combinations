@@ -1,0 +1,22 @@
+class Solution(object):
+    def combine(self, n, k):
+        solution = []
+        options = []
+        for i in range(1,n + 1):
+            options.append(i)
+        def backtracking(choices,open,moves,solution):
+            if moves == 0:
+                solution += [choices[:]]
+                choices = []
+            while open:
+                choices.append(open[0])
+                backtracking(choices,open[1:], moves - 1,solution)
+                choices.pop()
+                open = open[1:]
+            return solution
+        backtracking([],options,k,solution)
+        return solution
+
+
+object = Solution()
+object.combine(4,2)

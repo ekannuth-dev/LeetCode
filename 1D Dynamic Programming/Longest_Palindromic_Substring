@@ -1,0 +1,27 @@
+class Solution:
+    def longestPalindrome(self, s: str):
+        maxsub, tempsub = s[0] , s[0]
+        lp, rp = 0, 1
+        while (rp <= len(s) - 1):
+            clp = lp
+            crp = rp
+            while (clp >= 0 and crp <= len(s) - 1):
+                if s[clp] != s[crp]:
+                    break
+                else:
+                    tempsub = s[clp:crp + 1]
+                clp -= 1
+                crp += 1
+            if len(tempsub) > len(maxsub):
+                maxsub = tempsub
+            if (rp + lp) % 2 != 0:
+                rp += 1
+            else:
+                lp += 1
+        return maxsub
+
+
+object = Solution()
+object.longestPalindrome("r")
+
+

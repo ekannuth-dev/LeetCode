@@ -1,0 +1,16 @@
+class Solution(object):
+	def maxArea(self, height):
+		fp = 0
+		sp = len(height) - 1
+		maxArea = min(height[0], height[1]) * 1
+		while (fp != sp):
+			maxArea = max(min(height[fp], height[sp]) * (sp-fp), maxArea)
+			if height[sp] > height[fp]:
+				fp += 1
+			else:
+				sp -= 1
+		return maxArea
+
+
+object = Solution()
+object.maxArea([2,3,4,5,18,17,6])

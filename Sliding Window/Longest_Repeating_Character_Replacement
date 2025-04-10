@@ -1,0 +1,40 @@
+class Solution(object):
+    def characterReplacement(self, s, k):
+        dict = {}
+        freq, result, rightp = 0, 0, 0
+        leftp = 0
+        dict[s[leftp]] = 1
+        rem = k
+        switch = False
+        while (rightp < len(s)):
+            freq = dict.get(s[leftp])
+            val = len(s[leftp:rightp + 1]) - freq
+            if switch == False:
+                dict[s[rightp]] = 1 + dict.get(s[rightp], 0)
+                continue
+            elif val <= k:
+                curr = min(len(s[leftp:rightp + 1]), freq + k)
+                result = max(curr, result)
+                rightp += 1
+                switch = False
+            else:
+                dict[s[leftp]] -= 1
+                leftp += 1
+                switch = True
+        new_result = min(len(s), dict[s[leftp]] + k)
+        print(max(result, new_result))
+        return max(result, new_result)
+
+
+object = Solution()
+#object.characterReplacement("AAAAABBBBCBB", 4)
+
+object = Solution()
+#object.characterReplacement("CBBABBBBBBBB", 1)
+
+
+object = Solution()
+object.characterReplacement("ABAB", 2)
+
+object = Solution()
+#object.characterReplacement("AABABBA", 1)

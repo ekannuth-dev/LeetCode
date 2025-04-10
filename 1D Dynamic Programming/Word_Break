@@ -1,0 +1,35 @@
+class Solution:
+	def wordBreak(self, s, wordDict):
+		prevValid = ""
+		dp = [0]
+		start = 0
+		end = 1
+		for end in range(len(s) + 1):
+			if s[start:end] in wordDict:
+				prevValid += s[start:end]
+				dp += [end]
+				start = end
+			elif prevValid + s[start:end] in wordDict:
+				prevValid += s[start:end]
+				dp = [start,end]
+				start = end
+			elif len(dp) >= 2:
+				for index in range(0,len(dp)):
+					if prevValid[dp[index]:dp[-1]] + s[start:end] in wordDict:
+						dp = dp[index:] + [end]
+						prevValid += s[start:end]
+						start = end
+						break
+		return prevValid == s
+		
+	
+
+
+
+words = Solution()
+wordDict = {
+	"leet": 4,
+	"code": 5,
+}
+
+words.wordBreak("l", wordDict)

@@ -1,0 +1,13 @@
+class Solution(object):
+	def swap(nums,x,y):
+		temp = nums[x]
+		nums[x] = nums[y]
+		nums[y] = temp
+	def removeDuplicates(self, nums):
+		if len(nums) == 1:
+			return 1
+		fp = 0
+		count = 1
+		for i in range(len(nums)):
+			print(fp)
+		return fp

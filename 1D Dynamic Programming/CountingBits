@@ -1,0 +1,19 @@
+class Solution(object):
+	def countBits(self, n):
+		solution = [0,1]
+		for i in range(2,n + 1):
+			solution += [solution[i // 2] + solution[i % 2]]
+		return solution[0:n + 1]
+
+
+#base case
+object = Solution()
+object.countBits(1)
+
+#base case
+object = Solution()
+object.countBits(0)
+
+#test case
+object = Solution()
+object.countBits(20)

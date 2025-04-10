@@ -1,0 +1,22 @@
+class Solution(object):
+	def minCostClimbingStairs(self, cost):
+		for i in range(2,len(cost)):
+			cost[i] = min(cost[i-1], cost[i-2]) + cost[i]
+		return min(cost[-1],cost[-2])
+
+
+
+object = Solution()
+object.minCostClimbingStairs([10,15,2])
+
+#Test base case
+#object.minCostClimbingStairs([0,1])
+
+#Test case with maximum input
+#object.minCostClimbingStairs([10,899,999])
+
+
+#Save by buying side by side
+#object.minCostClimbingStairs([10,899,999,5000])
+
+

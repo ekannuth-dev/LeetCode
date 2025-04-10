@@ -1,0 +1,28 @@
+class Solution(object):
+	solution = False
+	def canReach(self, arr, start):
+		path = len(arr) * [0]
+		def dfs(arr,path,start):
+			if path[start] == 1:
+				return
+			#traversing right
+			if start + arr[start] <= len(arr) - 1:
+				if arr[start + arr[start]] == 0:
+					self.solution = True
+					return
+				path[start] = 1
+				dfs(arr, path, start + arr[start])
+			#traversing left
+			if start - arr[start] >= 0:
+				if arr[start - arr[start]] == 0:
+					self.solution = True
+					return
+				path[start] = 1
+				dfs(arr, path, start - arr[start])
+		dfs(arr, path, start)
+		print(self.solution)
+		return self.solution
+
+
+object = Solution()
+object.canReach([0,1], 1)

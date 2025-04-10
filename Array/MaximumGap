@@ -1,0 +1,9 @@
+class Solution(object):
+	def maximumGap(self, nums):
+		return
+
+
+
+
+test = Solution()
+test.maximumGap([10])

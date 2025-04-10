@@ -1,0 +1,35 @@
+class Solution(object):
+	def findLengthOfShortestSubarray(self, arr):
+		if len(arr) == 1:
+			return 0
+		fp = 0
+		sp = 0
+		for i in range(1,len(arr)):
+			if arr[i-1] > arr[i]:
+				sp = i
+				if fp == 0:
+					fp = sp
+		ls = arr[0:fp]
+		rs = arr[sp:]
+		diff = sp - fp
+		minremovals = len(ls)
+		#start from the end
+		print("this is ls", ls)
+		#how many rs can fit in ls
+		for x in range(len(ls) - 1,0,-1):
+			print(ls[x])
+			if ls[x] <= rs[0]:
+				print(x)
+				minremovals = min(len(ls) - x + diff, minremovals)
+		#how many ls can fit in rs
+		for y in range(0, len(rs) - 1):
+			if ls[-1] <= rs[y]:
+				minremovals = min(y + 1 + diff, minremovals)
+		print(minremovals)
+		return minremovals
+
+
+
+object = Solution()
+object.findLengthOfShortestSubarray([1,10,20,9,11,12,13,14,15])
+			

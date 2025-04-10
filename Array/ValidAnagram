@@ -1,0 +1,15 @@
+class Solution:
+    def isAnagram(self, s, t):
+        sampleDict = {}
+        if len(t) != len(s):
+            return False
+        for i in range(len(s)):
+            sampleDict[s[i]] = sampleDict.get(s[i],0) + 1
+        for i in range(len(t)):
+            if t[i] in sampleDict:
+                if sampleDict.get(t[i]) == 0:
+                    return False
+                sampleDict[t[i]] -= 1
+            else:
+                return False
+        return True

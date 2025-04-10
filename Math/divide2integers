@@ -1,0 +1,53 @@
+class Solution(object):
+	def divide(self, dividend, divisor):
+		solution = ""
+		sign = -1
+		if dividend * divisor >= 0:
+			sign = 1
+		dividend, divisor = abs(dividend), abs(divisor)
+		if divisor > dividend:
+			return 0
+		dividend = str(dividend)
+		currInt = ""
+		for i in range(len(dividend)):
+			currInt = int(currInt + dividend[i])
+			count = 0
+			if currInt == 0:
+				solution += str(currInt)
+			else:
+				while (currInt >= divisor):
+					currInt -= divisor
+					count += 1
+				solution += str(count)
+			currInt = str(currInt)
+		finalVal = (sign * int(solution))
+		if finalVal > 2147483647:
+			return 2147483647
+		elif finalVal < -2147483648:
+			return -2147483648
+		return sign * int(solution)
+
+
+object = Solution()
+object.divide(100,1)
+
+#General Test Case
+#object.divide(720,73)
+
+#Test with divisor greater than dividend
+#object.divide(23,720)
+
+#Single digit divisor and large dividend
+#object.divide(23933923923,2)
+
+#large negative dividend and positive divisor
+#object.divide(-2309393923,720)
+
+#negative dividend and negative divisor
+#object.divide(-23030,-720)
+
+#positive dividend and large negative divisor
+#object.divide(23,-720)
+
+
+

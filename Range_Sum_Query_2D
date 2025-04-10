@@ -1,0 +1,72 @@
+class NumMatrix(object):
+    def __init__(self, matrix):
+        m = len(matrix) - 1
+        n = len(matrix[0]) - 1
+        columnIndex = 0
+        rowIndex = 0
+        prevVal = 0
+        # Set first row and first column
+        while (rowIndex < 1):
+            if columnIndex == n:
+                matrix[rowIndex][columnIndex] += prevVal
+                rowIndex += 1
+                prevVal = matrix[rowIndex - 1][columnIndex]
+            else:
+                matrix[rowIndex][columnIndex] += prevVal
+                prevVal = matrix[rowIndex][columnIndex]
+                columnIndex += 1
+        columnIndex = 0
+        # Set next rows and colums
+        while (rowIndex <= m):
+            # first value in column
+            while (columnIndex <= n):
+                if columnIndex == 0:
+                    prevVal = matrix[rowIndex - 1][columnIndex]
+                    matrix[rowIndex][columnIndex] += prevVal
+                    columnIndex += 1
+                elif columnIndex == n:
+                    secondVal = matrix[rowIndex - 1][columnIndex - 1]
+                    # left value
+                    firstVal = matrix[rowIndex][columnIndex - 1]
+                    # top value
+                    thirdVal = matrix[rowIndex - 1][columnIndex]
+                    prevVal = firstVal - secondVal + thirdVal
+                    matrix[rowIndex][columnIndex] += prevVal
+                    break
+                else:
+                    # top left value
+                    secondVal = matrix[rowIndex - 1][columnIndex - 1]
+                    # left value
+                    firstVal = matrix[rowIndex][columnIndex - 1]
+                    # top value
+                    thirdVal = matrix[rowIndex - 1][columnIndex]
+                    prevVal = firstVal - secondVal + thirdVal
+                    matrix[rowIndex][columnIndex] += prevVal
+                    columnIndex += 1
+            columnIndex = 0
+            rowIndex += 1
+        newColumn = 0
+        array = [0] * (n + 2)
+        while (newColumn <= m):
+            matrix[newColumn] = [0] + matrix[newColumn]
+            newColumn += 1
+        array = [array] + matrix
+        self.matrix = array
+
+    def sumRegion(self, row1, col1, row2, col2):
+        row1 += 1
+        col1 += 1
+        row2 += 1
+        col2 += 1
+        totalsum = self.matrix[row2][col2]
+        trc = self.matrix[row1 - 1][col2]  # top right value
+        tlv = self.matrix[row1 - 1][col1 - 1]  # top left value
+        bottomleft = self.matrix[row2][col1 - 1]  # bottom left value
+        finalSum = totalsum - trc - (bottomleft - tlv)
+        return finalSum
+
+
+
+Sample = NumMatrix([[3, 0, 1, 4, 2], [5, 6, 3, 2, 1], [
+                   1, 2, 0, 1, 5], [4, 1, 0, 1, 7], [1, 0, 3, 0, 5]])
+Sample.sumRegion(1, 2, 2, 4)

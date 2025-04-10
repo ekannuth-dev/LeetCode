@@ -1,0 +1,17 @@
+class Solution:
+	def generateParenthesis(self, n):
+		finalSolution  = []
+		def dfs(finalSolution,currSolution, moves, openCount, closeCount):
+			if moves == 0 and openCount == closeCount:
+				finalSolution += [currSolution]
+				return
+			elif (openCount - closeCount) > moves or closeCount > openCount:
+				return
+			else:
+				dfs(finalSolution, currSolution + ")", moves - 1, openCount, closeCount + 1)
+				dfs(finalSolution,currSolution + "(", moves -1, openCount + 1, closeCount)
+		dfs(finalSolution,"(", (n * 2) - 1, 1, 0)
+		return finalSolution
+
+object = Solution()
+object.generateParenthesis(3)

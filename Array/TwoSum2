@@ -1,0 +1,22 @@
+class Solution(object):
+	def twoSum(self, numbers, target):
+		start_pointer, end_pointer = 0,len(numbers) - 1
+		while (start_pointer < end_pointer):
+			mid = (end_pointer + start_pointer) // 2 
+			maxVal, minVal = numbers[end_pointer], numbers[start_pointer]
+			if minVal + maxVal == target:
+				return [start_pointer + 1, end_pointer + 1]
+			elif minVal + numbers[mid] > target:
+				end_pointer = mid
+			elif maxVal + numbers[mid] < target:
+				start_pointer = mid
+			elif minVal + maxVal > target:
+				end_pointer -= 1
+			else:
+				start_pointer += 1
+		return
+
+
+
+testcase = Solution()
+testcase.twoSum([-50,-40, -30, -20, -10,0,1,2,4,5,8,10,20,30,40,50], 3)

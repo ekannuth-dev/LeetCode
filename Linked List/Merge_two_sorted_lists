@@ -1,0 +1,25 @@
+
+class ListNode:
+	def __init__(self, val=0, next=None):
+         self.val = val
+         self.next = next
+
+class Solution:
+	def mergeTwoLists(self, list1, list2):
+		print(list1.val)
+		while list1 and list2:
+			if list1.val > list2.val:
+				currNode = ListNode(list1.val)
+				currNode = currNode.next
+			else:
+				currNode = ListNode(list2.val)
+				currNode = currNode.next
+		if list1:
+			currNode.next = list1
+			return currNode
+		elif list2:
+			currNode.next = list2
+			return currNode
+		else:
+			return currNode
+			

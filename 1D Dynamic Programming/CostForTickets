@@ -1,0 +1,35 @@
+class Solution(object):
+	def mincostTickets(self, days, costs):
+		dayCost = [min(costs[0], costs[1], costs[2])]
+		for i in range(1,len(days)):
+			diff = 1
+			minCost = min(costs[0], costs[1], costs[2]) + dayCost[-1]
+			dayCost += [minCost]
+			for index in range(i,0,-1):
+				diff += days[index] - days[index-1]
+				if index == 1:
+					if diff <= 7:
+						minCost = min(costs[1], costs[2], minCost)
+					elif diff > 7 and diff <= 30:
+						minCost = min(costs[2], minCost)
+					else:
+						break
+				elif diff > 7 and diff <= 30:
+					minCost = min(costs[2] + dayCost[index - 2], minCost)
+				elif diff <= 7:
+					minCost = min(min(costs[1], costs[2]) + dayCost[index-2], minCost)
+				else:
+					break
+			dayCost[-1] = minCost
+		return dayCost[-1]
+
+object = Solution()
+#base case 
+#object.mincostTickets([1,4,6,7,8,20],[2,7,15])
+
+#Case of combinations of all tickets is most optimal
+object.mincostTickets([364],[3,3,1])
+
+#object.mincostTickets([1,4,6,7,8,20],[2,7,15])
+
+#object.mincostTickets([1,4,6,7,8,20],[2,7,15])

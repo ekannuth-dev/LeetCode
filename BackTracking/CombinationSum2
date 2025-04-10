@@ -1,0 +1,32 @@
+class Solution(object):
+	def combinationSum2(self, candidates, target):
+		solution = []
+		values = []
+		check = {}
+		while candidates:
+			values += [candidates[0]]
+			self.backtracking(candidates[1:],target - candidates[0],values, solution, check)
+			candidates = candidates[1:]
+			values.pop()
+		return solution
+
+	def backtracking(self,candidates,target,values, solution, check):
+		if target == 0:
+			checkval = values[:]
+			checkval.sort()
+			if tuple(checkval) not in check:
+				check[tuple(checkval)] = 0
+				solution.append(values[:])
+			values = []
+		elif target < 0:
+			values = []
+		else:
+			while candidates:
+				values += [candidates[0]]
+				self.backtracking(candidates[1:],target - candidates[0],values,solution,check)
+				candidates = candidates[1:]
+				values.pop()
+		return
+
+object = Solution()
+object.combinationSum2([2,5,2,1,2], 5)

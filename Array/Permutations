@@ -1,0 +1,20 @@
+class Solution(object):
+	def backTracking(self,nums, args, currSolution,solution):
+		if len(currSolution) == len(nums):
+				solution.append(currSolution)
+				currSolution = []
+		else:
+			for i in range(len(nums)):
+				if not args[i]:
+					args[i] = True
+					currSolution.append(nums[i])
+					self.backTracking(nums,args,currSolution,solution)
+					args[i] = False
+					currSolution.pop()
+
+	def permute(self, nums):
+		args = [False] * len(nums)
+		solution = []
+		self.backTracking(nums,args,[], solution)
+		return solution
+

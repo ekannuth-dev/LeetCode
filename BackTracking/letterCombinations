@@ -1,0 +1,47 @@
+class Solution(object):
+	phoneButtons = {
+						"2": "abc",
+						"3": "def",
+						"4": "ghi",
+						"5": "jkl",
+						"6": "mno",
+						"7": "pqrs",
+						"8": "tuv",
+						"9": "wxyz"
+					}
+	def backtracking(self,solution,combination,currButtons):
+		if currButtons == []:
+			solution += [combination]
+			return
+		else:
+			for i in range(len(currButtons[0])):
+				combination += currButtons[0][i]
+				self.backtracking(solution,combination, currButtons[1:])
+				combination = combination[:-1]
+	def letterCombinations(self, digits):
+		solution = []
+		currButtons, combination = [], ""
+		if not digits:
+			return solution
+		for i in range(len(digits)):
+			currButtons.append(self.phoneButtons[digits[i]])
+		self.backtracking(solution, combination,currButtons)
+		return solution
+
+object = Solution()
+#general test case
+#object.letterCombinations("23")
+
+#edge case no digit in string
+#object.letterCombinations("")
+
+#edge case max digits in string
+#object.letterCombinations("9752")
+#should result in 4 x 4 x 3 x 3
+
+#one digit in string
+#object.letterCombinations("5")
+
+#another general test case
+#object.letterCombinations("74")
+

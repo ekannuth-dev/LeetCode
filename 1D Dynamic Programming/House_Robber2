@@ -1,0 +1,26 @@
+class Solution:
+    def houseRob(self, nums):
+        evenMax = nums[0]
+        oddMax = 0
+        for i in range(1, len(nums)):
+            if i % 2 == 0:
+                evenMax += nums[i]
+                evenMax = max(evenMax, oddMax)
+            else:
+                oddMax += nums[i]
+                oddMax = max(oddMax, evenMax)
+        return max(oddMax, evenMax)
+
+    def rob(self, nums):
+        if len(nums) == 1:
+            return nums[0]
+        val1 = self.houseRob(nums[1:])
+        nums.pop()
+        val2 = self.houseRob(nums)
+        print(max(val1,val2))
+        return max(val1,val2)
+
+
+
+object = Solution()
+object.rob([0])

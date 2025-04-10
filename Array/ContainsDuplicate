@@ -1,0 +1,8 @@
+class Solution:
+    def containsDuplicate(self, nums):
+        sampleDict = {}
+        for i in range(len(nums)):
+            if nums[i] in sampleDict:
+                return True
+            sampleDict[nums[i]] = 1
+        return False

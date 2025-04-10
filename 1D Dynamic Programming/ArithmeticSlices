@@ -1,0 +1,22 @@
+class Solution(object):
+	def numberOfArithmeticSlices(self, nums):
+		diff = nums[1] - (nums[0])
+		n = len(nums)
+		result = 0
+		for i in range(2,n):
+			currdiff = nums[i] - (nums[i- 1])
+			if currdiff == diff:
+					if i >= 3:
+						for index in range(i - 2, 0, -1):
+							newdiff = nums[index] - nums[index-1]
+							if newdiff == currdiff:
+								result += 1
+							else:
+								break
+					result += 1
+			diff = currdiff
+		return result
+
+		
+object = Solution()
+object.numberOfArithmeticSlices([-10,-9,-8,0])

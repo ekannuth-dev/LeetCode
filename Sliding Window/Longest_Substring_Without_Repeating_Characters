@@ -1,0 +1,15 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        dict = {}
+        result, leftp, rightp = 0, 0, 1
+        for rightp in range(len(s)):
+            if s[rightp] in dict and dict[s[rightp]] >= leftp:
+                leftp = dict[s[rightp]] + 1
+            else:
+                result = max(result, (rightp + 1) - leftp)
+            dict[s[rightp]] = rightp
+        return result
+
+
+object = Solution()
+object.lengthOfLongestSubstring("abcabcbb")

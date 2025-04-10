@@ -1,0 +1,44 @@
+class Solution(object):
+    def combinationSum(self, candidates, target):
+        choices = len(candidates) * [0]
+        values, solution = [], []
+        check = {}
+        return self.backtracking(candidates,target,choices,values,solution,check)
+
+    def backtracking(self,candidates,target,choices,values,solution,check):
+        if target == 0:
+            if tuple(choices) not in check:
+                solution += [values[:]]
+                check[tuple(choices)] = 0
+            choices,values = [],[]
+        elif target < 0:
+            choices, values = [],[]
+        else:
+            for i in range(len(candidates)):
+                choices[i] += 1
+                values += [candidates[i]]
+                self.backtracking(candidates,target - candidates[i],choices,values,solution,check)
+                values.pop()
+                choices[i] -= 1
+        return solution
+
+
+
+result = Solution()
+result.combinationSum([2,3,5], 7)
+
+
+#Base Cases
+#result.combinationSum([2,3,6,7], 7)
+
+#Base Cases
+#result.combinationSum([2,3,5], 8)
+
+#Base Cases
+#result.combinationSum([2], 1)
+
+#Test Case
+#result.combinationSum([2], 30)
+
+#Edge Case
+#result.combinationSum([2,3,4], 40)

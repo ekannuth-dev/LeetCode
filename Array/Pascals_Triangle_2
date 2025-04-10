@@ -1,0 +1,15 @@
+class Solution(object):
+	def getRow(self, rowIndex):
+		if rowIndex == 0:
+			return [1]
+		Solution = [1,1]
+		for i in range(1,rowIndex):
+			currentSolution = []
+			for x in range(1,len(Solution)):
+				currentSolution += [Solution[x-1] + Solution[x]]
+			Solution = [1] + currentSolution + [1]
+		return Solution
+			
+
+testcase = Solution()
+testcase.getRow(3)

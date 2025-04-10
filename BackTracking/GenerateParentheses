@@ -1,0 +1,47 @@
+class Solution(object):
+	def backTracking(self,moves, valid, temp, Solution, choices):
+		if moves == 0:
+			if valid == []:
+				Solution += [temp]
+				temp = ""
+				return
+			else:
+				return
+		for i in range(2):
+			temp += choices[i]
+			if valid == [] and temp[-1] == ")":
+				return
+			else:
+				if valid[-1] == '(' and  choices[i] == ')':
+					valid.pop()
+					self.backTracking(moves-1,valid,temp,Solution, choices)
+				else:
+					valid += [choices[i]]
+					self.backTracking(moves-1,valid,temp,Solution, choices)
+					print('this is before popping', valid)
+					valid.pop()
+				temp = choices[:-1]
+		return
+
+	def generateParentheses(self, n):
+		moves = n * 2
+		Solution = []
+		choices = ["(", ")"]
+		for i in range(2):
+			temp = ""
+			valid = []
+			temp = choices[i]
+			valid += [choices[i]]
+			print(valid)
+			self.backTracking(moves-1,valid,temp,Solution,choices)
+			print('this is temp',temp)
+			temp = ""
+			print('rn valid', valid)
+			#valid.pop()
+		print(Solution)
+		return Solution
+
+
+
+object = Solution()
+object.generateParentheses(1)

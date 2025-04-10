@@ -1,0 +1,19 @@
+class Solution:
+	def generate(self, numRows):
+		dpArray = [[1],[1,1]]
+		if numRows == 1:
+			return [dpArray[0]]
+		elif numRows == 2:
+			return dpArray
+		for i in range(1,numRows -1):
+			array = [dpArray[i][0]]
+			for x in range(1,len(dpArray[i])):
+				val = dpArray[i][x] + dpArray[i][x-1]
+				array.append(val)
+			array.append(dpArray[i][-1])
+			dpArray.append(array)
+		return dpArray
+
+
+pascal = Solution()
+pascal.generate(4)
