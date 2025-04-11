@@ -1,0 +1,11 @@
+class Solution(object):
+	def merge(self, intervals):
+		lowerbound = intervals[0][0]
+		upperbound = intervals[0][1]
+		return
+
+
+
+sol = Solution()
+sampleList = [[1,4],[4,5]]
+sol.merge(sampleList)
