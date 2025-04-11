@@ -1,0 +1,22 @@
+class RandomizedSet(object):
+	def __init__(self):
+		self.sample_dict = {}
+		self.keys = []
+		return
+	def insert(self, val):
+		if self.sample_dict.get(val) == False:
+			self.sample_dict[val] = 0
+			return True
+		else:
+			return False
+	def remove(self, val):
+		if self.sample_dict.get(val) == True:
+			self.sample_dict.pop(val)
+			return True
+		else:
+			return False
+	def getRandom(self):
+		key = random.choice(list(self.sample_dict))
+		value = self.sample_dict[key]
+		return value
+        
