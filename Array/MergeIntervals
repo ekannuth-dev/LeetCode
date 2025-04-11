@@ -1,6 +1,7 @@
 class Solution(object):
 	def merge(self, intervals):
 		# [1,4], [4,5]
+		intervals.sort(key = lambda i : i[0])
 		lowerBound = intervals[0][0]
 		upperBound = intervals[0][1]
 		solution = [[lowerBound, upperBound]]
