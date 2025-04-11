@@ -1,0 +1,33 @@
+class Solution(object):
+	def dailyTemperatures(self, temperatures):
+		end = len(temperatures) - 1
+		start = end
+		solution = [0] * len(temperatures)
+		index = start
+		while (index >= 0):
+			print(temperatures[start:end])
+			#why do I want this?
+			if start == end:
+				start = index
+				end = start
+				index -= 1
+			elif temperatures[index] < temperatures[start]:
+				solution[index] = start - index
+				start -= 1
+			elif temperatures[index] < temperatures[end]:
+				solution[index] = end - index
+				start += 1
+			#you are not smaller then the end
+			#no valid value beyond
+			#restart the next possible window, current is the largest
+			else:
+				start = index
+				end = start
+				index -= 1
+		print(solution)
+		return solution
+
+
+
+sampleInstance = Solution()
+sampleInstance.dailyTemperatures([73,74,75,71,69,72,76,73])
