@@ -1,11 +1,33 @@
 class Solution(object):
 	def merge(self, intervals):
-		lowerbound = intervals[0][0]
-		upperbound = intervals[0][1]
-		return
+		# [1,4], [4,5]
+		lowerBound = intervals[0][0]
+		upperBound = intervals[0][1]
+		solution = [[lowerBound, upperBound]]
+		for x in range(1,len(intervals)):
+			curr = intervals[x]
+			if curr[0] < lowerBound and curr[1] > upperBound:
+				#covers all intervals
+				solution = [curr]
+			elif curr[1] < lowerBound:
+				solution = [curr] + solution
+			elif curr[0] < lowerBound:
+				solution[0][0] = curr[0]
+			elif curr[0] > upperBound:
+				solution.append(curr)
+			elif curr[1] > upperBound:
+				solution[-1][1] = curr[1]
+			lowerBound = solution[0][0]
+			upperBound = solution[-1][1]
+		print(solution)
+		return solution
 
 
 
 sol = Solution()
-sampleList = [[1,4],[4,5]]
+#sampleList = [[1,1]]
+#sol.merge(sampleList)
+
+#sampleList = [[4,4],[0,0],[2,2]]
+sampleList = [[2,3],[5,5],[2,2],[3,4],[3,4]]
 sol.merge(sampleList)

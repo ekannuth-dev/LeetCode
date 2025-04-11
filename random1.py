@@ -1,7 +1,5 @@
 upperBound = 0
 lowerBound = 1
-ranges = [lowerBound, upperBound]
+ranges = [[lowerBound, upperBound]]
 lowerBound = upperBound
-upperBound += 1
-print(lowerBound)
-print(ranges)
+print(ranges[-1][1])
