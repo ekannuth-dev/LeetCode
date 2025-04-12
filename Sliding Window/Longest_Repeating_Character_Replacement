@@ -1,10 +1,8 @@
 class Solution(object):
     def characterReplacement(self, s, k):
-        lp = 0
-        rp = 1
+        lp, rp = 0 , 1
         solution = 1
-        my_dict = {}
-        my_dict[s[0]] = 1
+        my_dict = { s[0] : 1 }
         while (rp <= len(s)):
             maxKey = max(my_dict, key=my_dict.get)
             if lp == rp:
@@ -17,7 +15,6 @@ class Solution(object):
             else:
                 my_dict[s[lp]] = my_dict.get(s[lp]) - 1
                 lp += 1
-        print(solution)
         return solution
 
 
