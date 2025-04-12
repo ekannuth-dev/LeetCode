@@ -1,40 +1,28 @@
 class Solution(object):
     def characterReplacement(self, s, k):
-        dict = {}
-        freq, result, rightp = 0, 0, 0
-        leftp = 0
-        dict[s[leftp]] = 1
-        rem = k
-        switch = False
-        while (rightp < len(s)):
-            freq = dict.get(s[leftp])
-            val = len(s[leftp:rightp + 1]) - freq
-            if switch == False:
-                dict[s[rightp]] = 1 + dict.get(s[rightp], 0)
-                continue
-            elif val <= k:
-                curr = min(len(s[leftp:rightp + 1]), freq + k)
-                result = max(curr, result)
-                rightp += 1
-                switch = False
+        lp = 0
+        rp = 1
+        solution = 1
+        my_dict = {}
+        my_dict[s[0]] = 1
+        while (rp <= len(s)):
+            maxKey = max(my_dict, key=my_dict.get)
+            if lp == rp:
+                rp += 1
+                my_dict[s[rp -1: rp]] = my_dict.get(s[rp-1:rp], 0) + 1
+            elif len(s[lp:rp]) - my_dict.get(maxKey) <= k:
+                solution = max(solution,len(s[lp:rp]))
+                rp += 1
+                my_dict[s[rp -1: rp]] = my_dict.get(s[rp-1:rp], 0) + 1
             else:
-                dict[s[leftp]] -= 1
-                leftp += 1
-                switch = True
-        new_result = min(len(s), dict[s[leftp]] + k)
-        print(max(result, new_result))
-        return max(result, new_result)
+                my_dict[s[lp]] = my_dict.get(s[lp]) - 1
+                lp += 1
+        print(solution)
+        return solution
 
 
 object = Solution()
-#object.characterReplacement("AAAAABBBBCBB", 4)
-
-object = Solution()
-#object.characterReplacement("CBBABBBBBBBB", 1)
+object.characterReplacement("AABABBA", 1)
 
 
-object = Solution()
-object.characterReplacement("ABAB", 2)
-
-object = Solution()
-#object.characterReplacement("AABABBA", 1)
+#object.characterReplacement("A", 0)
