@@ -1,4 +1,6 @@
 class Solution(object):
+    #can be tricky to get max value associated to a key from dictionary
+    # use an dictionary but initialize each key associated to a letter - 26
     def characterReplacement(self, s, k):
         lp, rp = 0 , 1
         solution = 1
