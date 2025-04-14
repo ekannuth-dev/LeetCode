@@ -6,5 +6,6 @@ def func(strings):
 	s = "banana"
 	s = list(s)
 	print(s)
-
+nums = [1,2,3]
+print(nums[:1])
 func("zadbce")

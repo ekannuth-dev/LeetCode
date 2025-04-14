@@ -1,0 +1,43 @@
+class Solution(object):
+	def __init__(self):
+		self.solution = 0
+	def binarySearch(self,nums, mid, lp, rp):
+	#	mid = len(nums) // 2
+	#	lp = mid - 1
+	#	rp = mid + 1
+		if mid == 0:
+			if nums[mid] > nums[rp]:
+				return mid
+			else:
+				return rp
+		elif mid == len(nums) - 1:
+			if nums[mid] > nums[lp]:
+				return mid
+			else:
+				return lp
+		elif nums[lp] < nums[mid] and nums[mid] > nums[rp]:
+		#	print(nums[mid])
+			print(mid)
+			self.solution = mid
+			return
+		elif nums[mid] < nums[rp]:
+			self.binarySearch(nums, rp + 1, rp, rp + 2) #include in right side
+			self.binarySearch(nums, lp - 1, lp - 2, lp)
+		elif nums[lp] > nums[mid]:
+			self.binarySearch(nums, lp, lp - 1, mid)
+			self.binarySearch(nums, mid - 1, rp, rp + 2)  #include in left side
+
+	def findPeakElement(self, nums):
+		if len(nums) == 1:
+			return 0
+		mid = len(nums) // 2
+		lp = mid -1
+		rp = mid + 1
+		self.binarySearch(nums,mid,lp,rp)
+		return self.solution
+
+testing = Solution()
+testing.findPeakElement([1,2])
+
+testing = Solution()
+#testing.findPeakElement([1,2,3])
