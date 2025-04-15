@@ -1,0 +1,33 @@
+class MedianFinder(object):
+	def __init__(self):
+		self.stream = []
+	def addNum(self, num):
+		if not self.stream:
+			self.stream.append(num)
+			return
+		for i in range(len(self.stream)):
+			if num < self.stream[i]:
+				self.stream = self.stream[:i] + [num] + self.stream[i:]
+				return
+		self.stream.append(num)
+	def findMedian(self):
+		copy = self.stream
+		# even case
+		if len(copy) % 2 == 0:
+			rp = len(copy) // 2
+			lp = rp - 1
+			solution = (copy[rp] + copy[lp]) / 2.0
+			return solution
+		#odd case
+		else:
+			solution = copy[len(copy) // 2]
+			return solution
+
+
+# Your MedianFinder object will be instantiated and called as such:
+obj = MedianFinder()
+obj.addNum(1)
+obj.addNum(2)
+#obj.addNum(3)
+#obj.addNum(4)
+param_2 = obj.findMedian()
