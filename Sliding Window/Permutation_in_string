@@ -1,0 +1,27 @@
+class Solution(object):
+	def checkInclusion(self, s1, s2):
+		solutionDict = {}
+		haves = len(s1)
+		start = 0
+		for i in range(len(s1)):
+			solutionDict[s1[i]] = solutionDict.get(s1[i],0) + 1
+		end = 0
+		while (end < len(s2)):
+			if haves == 0:
+				return True
+			elif solutionDict.get(s2[end],0) != 0:
+				solutionDict[s2[end]] = solutionDict.get(s2[end]) - 1
+				haves -= 1
+				end += 1
+			elif s2[end] == s2[start]:
+				start += 1
+				end += 1
+			elif s2[start] in solutionDict:
+				solutionDict[s2[start]] = solutionDict.get(s2[start]) + 1
+				start += 1
+				haves += 1
+		return print(haves == 0)
+
+
+testObject = Solution()
+testObject.checkInclusion("dbace", "cadbace")
