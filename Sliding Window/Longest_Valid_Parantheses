@@ -1,0 +1,28 @@
+class Solution(object):
+	def longestValidParentheses(self, s):
+		stack = []
+		window = 0
+		subwindow = 0
+		solution = 0
+		for i in range(len(s)):
+			print("value of:", window)
+			if s[i] == ')' and len(stack) == 1:
+				stack.pop()
+				window += subwindow + 2
+				solution = max(solution, window)
+				subwindow = 0
+			elif s[i] == ')' and stack != []:
+				stack.pop()
+				subwindow += 2
+				solution = max(solution, subwindow)
+			elif s[i] == ')' and stack == []:
+				solution = max(solution, window)
+				window = 0
+				subwindow = 0
+			else:
+				stack.append(s[i])
+		print(solution)
+		return solution
+
+testObject = Solution()
+testObject.longestValidParentheses("(()(((()")
