@@ -3,4 +3,10 @@ class Solution(object):
 		# sample board
 		# [A,B,C,D,E]
 		# [H,I,J,K,L]
+
+
+		#[["A","B","C","E"],
+		# ["S","F","C","S"],
+		# ["A","D","E","E"]]
+		
 		return
