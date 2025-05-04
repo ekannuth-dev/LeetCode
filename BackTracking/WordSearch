@@ -8,5 +8,30 @@ class Solution(object):
 		#[["A","B","C","E"],
 		# ["S","F","C","S"],
 		# ["A","D","E","E"]]
-		
+		keyPairs = {}
+		solution = ""
+		rows = len(board)
+		columns = len(board[0])
+		m,n = 0,0
+		def dfs(m,n,word,keyPairs):
+			if word == "":
+				return True
+			elif board[m][n] == word[0]:
+				solution += board[m][n]
+				keyPairs[[m,n]] = 0
+				dfs(m,n,word[1:],solution,keyPairs)
+				#undo my choice
+				solution = solution[:-1]
+				keyPairs.pop([m,n])
+			#not a letter
+			else:
+				#make a choice
+				solution += board[m][n]
+				keyPairs[[m,n]] = 0
+				dfs(m,n,word,solution,keyPairs)
+				#undo my choice
+				solution = solution[:-1]
+				keyPairs.pop([m,n])
+		if m - 1 >= 0 and keyPairs.get([m-1,n]) == 0:
+				dfs(m-1,n,word,solution,keyPairs)
 		return
