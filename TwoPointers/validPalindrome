@@ -2,8 +2,7 @@ class Solution(object):
 	def isPalindrome(self, s):
 		cleanString = ""
 		for i in range(len(s)):
-			check = s[i].isalpha()
-			if check:
+			if s[i].isalnum():
 				cleanString += s[i].upper()
 		lp = 0
 		rp = len(cleanString) - 1
@@ -12,11 +11,10 @@ class Solution(object):
 				return False
 			lp += 1
 			rp -= 1
-		print(True)
 		return True
 
 
 object = Solution()
 #object.isPalindrome("r ac e car")
 
-object.isPalindrome("A man, a plan, a canal: Panama")
+object.isPalindrome("0P")
