@@ -1,2 +1,3 @@
 sampleString = "abcdde"
-sampleString.pop()
+sampleString = sampleString.upper()
+print(sampleString)
