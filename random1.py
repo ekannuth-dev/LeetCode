@@ -1,3 +1,3 @@
 sampleString = "abcdde"
 sampleString = sampleString.upper()
-print(sampleString)
+print(7 / 2)
