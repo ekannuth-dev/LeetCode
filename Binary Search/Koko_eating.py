@@ -4,11 +4,10 @@ class Solution(object):
 			for i in range(len(piles)):
 				if h <= 0:
 					return False
-				else:
-					ceil = 0
-					if piles[i] % eat != 0:
-						ceil = 1
-					h -= (piles[i] // eat) + ceil
+				ceil = 0
+				if piles[i] % eat != 0:
+					ceil = 1
+				h -= (piles[i] // eat) + ceil
 			return (h >= 0)
 		left = 1
 		right = max(piles)
