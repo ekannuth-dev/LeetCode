@@ -1,3 +1,6 @@
-sampleString = "abcdde"
-sampleString = sampleString.upper()
-print(7 / 2)
+
+
+# Understanding mutability and immutability in python
+testString = "ehank"
+#testString[0] = 'd'
+testString = "ehan"
